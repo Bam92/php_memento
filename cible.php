@@ -26,7 +26,7 @@ if (isset($_FILES['my_file']) AND $_FILES['my_file'] ['error'] == 0) {
 		# Enfin s'assurer que seul le .zip est uploader
 		$info_fichier = pathinfo($_FILES['my_file'] ['name']);
 		$extension_upload = $info_fichier['extension'];
-		echo $extension_upload;
+		#echo $extension_upload;
 		$extension_authorize  = array('zip');
 
 		if (in_array($extension_upload, $extension_authorize)) {
@@ -35,8 +35,8 @@ if (isset($_FILES['my_file']) AND $_FILES['my_file'] ['error'] == 0) {
 			move_uploaded_file($_FILES['my_file'] ['tmp_name'], 'uploads/ ' . basename($_FILES['my_file'] ['name']));
 
 			echo "Votre fichier a ete bien envoye";
-			echo $extension_upload;
-		}
+			#echo $extension_upload;
+		} else echo "Reessayer";
 	}
 
 }
