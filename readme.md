@@ -20,7 +20,20 @@ du côté front, je décide maintenant de passer au niveau supérieur.
 ### Résusltat
 A venir
 
-Déjà un petit memento est cours de rédaction
+Déjà un petit memento est cours de rédaction (evernote ou papier)
 
 
 N'hésitez pas si vous avez des recommandations à faire
+
+### Applications
+
+#### Mini chat
+**Objectif**
+* permettre à l'utilisateur de laisser un commentaire (avec son pseudp)
+* stocker les infos dans la bdd
+* affiher les 10 derniers posts (du plus recent au plus ancien)
+
+**Connaissances**
+* transmettre des variables via un formulaire
+* lire/écrire dans une table
+* utiliser PDO et des requêtes préparées
