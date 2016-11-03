@@ -37,3 +37,21 @@ N'hésitez pas si vous avez des recommandations à faire
 * transmettre des variables via un formulaire
 * lire/écrire dans une table
 * utiliser PDO et des requêtes préparées
+
+**Commentaires
+
+Il n'a pas été facile d'un premier abord. Néanmoins, l'exercice m'a permi de revoir la connexion à la bdd avec PDO. C'est super maintenant
+
+#### Site de rencontre sportive
+**Objectif**
+* offrir aux internautes sportifs la possibilité d’entrer en contact avec d’autres personnes pratiquants ou supporters d’un même sport dans un département donné.
+
+**Connaissances**
+* transmettre des variables via un formulaire
+* lire/écrire dans une table
+* utiliser PDO et des requêtes préparées
+
+**Commentaires
+
+Il n'a pas été facile d'un premier abord. Néanmoins, l'exercice m'a permi de revoir la connexion à la bdd avec PDO. C'est super maintenant
+
