@@ -38,7 +38,7 @@ $reponse->closeCursor();
     		<label for="new_sport">OU Ajouter a la liste :</label><input type="text" name="new_sport">
     		<input type="submit" name="Ajouter">
     		<?php
-    		if (isset($_POST['new_sport'])) {
+    		if (!empty($_POST['new_sport'])) { // J'ai remplace isset par !empty car j'avais des entrees vides
     			$req = $bdd->prepare('INSERT INTO sport(design) VALUES(?)');
 				$req->execute(array($_POST['new_sport']));
 
@@ -63,12 +63,21 @@ $reponse->closeCursor();
     	if (isset($_POST['nom']) AND isset($_POST['email']) ) { // For security purpose
     		$_POST['nom'] = htmlspecialchars($_POST['nom']);
     		$_POST['email'] = htmlspecialchars($_POST['email']);
-    		if (preg_match("#^[a-z0 -9._-]+ @[a-z0 -9._-]{2 ,}\.[a-z]{2,4}$
-#", $_POST['email'])) {
+    		if (preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email'])) {
     			# Insert info in the db
+    			$design = $_POST['pratiaque_sport'];
+    			$id_sport = $bdd->query('SELECT id_sport FROM sport WHERE design = $design');
+    			echo $_POST['pratiaque_sport'];
+    			$req = $bdd->prepare('INSERT INTO personne(id_personne, nom, prenom, depart, mail)  VALUES(?, ?, ?, ?)');
     			
+				$req->execute(array($_POST['nom'], $_POST['prenom'], $_POST['dept'], $_POST['email']));
+				$req = $bdd->prepare('INSERT INTO pratique(id_personne, id_sport, niveau) VALUES(personne.id_personne, $id_sport, ?)');
+				$req->execute(array($_POST['pratiaque_sport']));
+
+				echo "<p>Vos infos ont ete sauvegardee avec succes!</p>";
+
     		} else {
-    			echo "L'adresse mail " .$_POST['email']. "n'est pas valide";
+    			echo "L'adresse mail <strong>" .$_POST['email']. "</strong> n'est pas valide";
     		}
     	} else {
     		echo "Erreur: verifiez vos coordonnees";
