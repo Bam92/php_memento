@@ -7,7 +7,7 @@
 <body>
 <form method="post" action="ajout_billet.php">
 	<input type="text" name="titre" placeholder="titre" required> <br />
-	<textarea rows="15" name="contenu"></textarea>
+	<textarea rows="15" name="contenu"></textarea><br />
 	<input type="submit" value="Envoyer">
 </form>
 <?php
