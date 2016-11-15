@@ -39,6 +39,11 @@
 $req = $bdd->prepare('SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM billets WHERE id = ?');
 $req->execute(array($_GET['billet']));
 $donnees = $req->fetch();
+
+// Insure that the post exists
+if (empty($donnees)) {
+		echo "Ce billet n'existe pas !";
+	}
 $req->closeCursor();
 ?>
 <div class="news">
@@ -57,6 +62,7 @@ $req = $bdd -> prepare('SELECT id_billet, auteur, commentaire, DATE_FORMAT(date_
 $req->execute(array($_GET['billet']));
 
 while ($donnees = $req->fetch()) {
+	
 	?>
 	<div>
 	<p><strong>
@@ -74,6 +80,15 @@ while ($donnees = $req->fetch()) {
 }
 $req->closeCursor();
 ?>
+
+<!-- Add new comment -->
+<form method="post" action="commentaire_post.php">
+	<p>Laissez un commentaire</p>
+	<input type="text" name="pseudo" placeholder="votre pseudo"><br />
+	<textarea rows="10" name="commentaire"></textarea><br />
+	<input type="hidden" name="id_billet" value="<?php echo $_GET['billet'];?>"><br />
+	<input type="submit" value="Envoyer"><input type="reset" value="Annuler">
+</form>
 
 </body>
 </html>
