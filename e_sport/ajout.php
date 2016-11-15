@@ -67,6 +67,7 @@ $reponse->closeCursor();
     			# Insert info in the db
     			$design = $_POST['pratiaque_sport'];
     			$id_sport = $bdd->query('SELECT id_sport FROM sport WHERE design = $design');
+    			echo $id_sport;
     			echo $_POST['pratiaque_sport'];
     			$req = $bdd->prepare('INSERT INTO personne(id_personne, nom, prenom, depart, mail)  VALUES(?, ?, ?, ?)');
     			
@@ -74,7 +75,7 @@ $reponse->closeCursor();
 				$req = $bdd->prepare('INSERT INTO pratique(id_personne, id_sport, niveau) VALUES(personne.id_personne, $id_sport, ?)');
 				$req->execute(array($_POST['pratiaque_sport']));
 
-				echo "<p>Vos infos ont ete sauvegardee avec succes!</p>";
+				echo "<p>Vos infos ont été sauvegardées avec succes!</p>";
 
     		} else {
     			echo "L'adresse mail <strong>" .$_POST['email']. "</strong> n'est pas valide";

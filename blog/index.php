@@ -34,14 +34,14 @@
 <h1>Mon super blog !</h1>
 <p>Derniers billets du blog </p>
 <?php
-$reponse = $bdd -> query('SELECT id, titre, contenu, date_creation AS date FROM billets ORDER BY date_creation DESC LIMIT 0, 5');
+$reponse = $bdd -> query('SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT 0, 5');
 
 while ($donnees = $reponse->fetch()) {
 	?>
 	<div class="news">
 	<h3>
 	<?php echo htmlspecialchars($donnees['titre']);?>
-	<em>le <?php echo htmlspecialchars($donnees['date']);?></em>
+	<em>le <?php echo htmlspecialchars($donnees['date_creation_fr']);?></em>
 	</h3>
 	<p>
 	<?php 

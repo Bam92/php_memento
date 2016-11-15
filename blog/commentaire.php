@@ -36,7 +36,7 @@
 
 <?php
 // Recuperation de billet
-$req = $bdd->prepare('SELECT id, titre, contenu, date_creation FROM billets WHERE id = ?');
+$req = $bdd->prepare('SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM billets WHERE id = ?');
 $req->execute(array($_GET['billet']));
 $donnees = $req->fetch();
 $req->closeCursor();
@@ -46,21 +46,22 @@ $req->closeCursor();
 	<?php
 	echo htmlspecialchars($donnees['titre']);
 	?>
-	<em>le<?php echo htmlspecialchars($donnees['date_creation']);?></em>
+	<em>le<?php echo htmlspecialchars($donnees['date_creation_fr']);?></em>
 	</h3>
 	<p>
 	<?php echo nl2br(htmlspecialchars($donnees['contenu']));?></p>
 </div>
 <h2>Commentaires</h2>
 <?php
-$reponse = $bdd -> query('SELECT id_billet, auteur, commentaire, date_creation AS date FROM Commentaires WHERE id_billet = $_GET["billet"] ORDER BY date_creation DESC');
+$req = $bdd -> prepare('SELECT id_billet, auteur, commentaire, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM commentaires WHERE id_billet = ? ORDER BY date_creation DESC');
+$req->execute(array($_GET['billet']));
 
-while ($donnees = $reponse->fetch()) {
+while ($donnees = $req->fetch()) {
 	?>
 	<div>
 	<p><strong>
 	<?php echo htmlspecialchars($donnees['auteur']);?></strong>
-	<em>le <?php echo htmlspecialchars($donnees['date']);?></em>
+	<em>le <?php echo htmlspecialchars($donnees['date_creation_fr']);?></em>
 	</p>
 	<p>
 	<?php 
@@ -71,7 +72,7 @@ while ($donnees = $reponse->fetch()) {
 </div>
 <?php
 }
-$reponse->closeCursor();
+$req->closeCursor();
 ?>
 
 </body>
